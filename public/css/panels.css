@@ -1,42 +1,79 @@
 #header-bar {
   background: #12121a;
   border: 1px solid #2a2a3a;
-  padding: 8px 12px;
-  border-radius: 4px;
-  min-height: 40px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  line-height: 1.4;
 }
 
 #main-content {
-  flex: 1;
   background: #12121a;
   border: 1px solid #2a2a3a;
-  padding: 12px;
-  border-radius: 4px;
+  padding: clamp(0.5rem, 1.5vw, 1rem);
+  border-radius: 0.25rem;
   overflow-y: auto;
+  min-height: 0;
 }
 
 #action-bar {
   background: #12121a;
   border: 1px solid #2a2a3a;
-  padding: 8px 12px;
-  border-radius: 4px;
-  min-height: 48px;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .btn {
   background: #1a1a2e;
   color: #c8c8d0;
   border: 1px solid #3a3a5a;
-  padding: 6px 16px;
-  border-radius: 3px;
+  padding: 0.4rem 1rem;
+  border-radius: 0.25rem;
   cursor: pointer;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 0.9rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 2.4rem;
+}
+.btn:hover    { background: #2a2a4e; border-color: #5a5a8a; }
+.btn:active   { background: #3a3a6e; }
+.btn:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+
+.btn-sm {
+  min-height: 1.6rem;
+  min-width: 1.6rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.85rem;
 }
 
-.btn:hover { background: #2a2a4e; border-color: #5a5a8a; }
+.stat-grid { margin: 0.5rem 0; }
+.stat-row  { display: flex; align-items: center; gap: 0.5rem; padding: 0.2rem 0; }
+.stat-label { width: 3rem; color: #8888cc; font-weight: bold; }
+.stat-value { width: 2.5rem; text-align: right; }
+
+#combat-log {
+  max-height: 35vh;
+  overflow-y: auto;
+  color: #999;
+  padding: 0.25rem 0;
+  line-height: 1.5;
+}
+#combat-log p { margin: 0.15rem 0; }
+
+@media (max-width: 30rem) {
+  #action-bar { flex-direction: column; }
+  .btn { width: 100%; text-align: center; }
+}
+
+@media (pointer: coarse) {
+  .btn    { min-height: 2.75rem; }
+  .btn-sm { min-height: 2rem; min-width: 2rem; }
+}
