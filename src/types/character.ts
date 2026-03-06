@@ -8,4 +8,5 @@ export interface Character {
   stats: PrimaryStats;
   derived: DerivedStats;
   credits: number;
+  statPoints: number;
 }
