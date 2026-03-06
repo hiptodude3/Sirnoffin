@@ -1,29 +1,23 @@
 import { Character } from '../types/character.js';
 import { createPrimaryStats } from '../types/primary-stats.js';
-import { calcMaxHp } from '../formulas/max-hp.js';
-import { calcMaxMp } from '../formulas/max-mp.js';
-import { calcMaxSp } from '../formulas/max-sp.js';
+import { recalcDerived } from './recalc-derived.js';
 
 export function createCharacter(name: string): Character {
-  const s = createPrimaryStats();
-  const level = 1;
-  const maxHp = calcMaxHp(level, s.end);
-  const maxMp = calcMaxMp(level, s.wis);
-  const maxSp = calcMaxSp(s);
-
-  return {
-    name, level, exp: 0, credits: 0, stats: s,
+  const char: Character = {
+    name, level: 1, exp: 0, credits: 0, statPoints: 0,
+    stats: createPrimaryStats(),
     derived: {
-      maxHp, maxMp, maxSp,
-      currentHp: maxHp, currentMp: maxMp, currentSp: maxSp,
-      attack: s.str * 2 + Math.floor(s.dex * 0.5),
-      defense: Math.floor(s.end * 1.5 + s.str * 0.5),
-      magAttack: s.int * 2 + s.wis,
-      magDefense: Math.floor(s.wis * 1.5 + s.int * 0.5),
-      speed: s.agi * 2 + Math.floor(s.dex * 0.5),
-      critical: s.dex * 0.5 + s.wis * 0.25,
+      maxHp: 0, maxMp: 0, maxSp: 0,
+      currentHp: 0, currentMp: 0, currentSp: 0,
+      attack: 0, defense: 0, magAttack: 0, magDefense: 0,
+      speed: 0, critical: 0,
       physMitigation: 0, magMitigation: 0,
       evade: 0, parry: 0, resist: 0, block: 0,
     },
   };
+  recalcDerived(char);
+  char.derived.currentHp = char.derived.maxHp;
+  char.derived.currentMp = char.derived.maxMp;
+  char.derived.currentSp = char.derived.maxSp;
+  return char;
 }
