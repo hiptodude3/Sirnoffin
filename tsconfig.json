@@ -3,7 +3,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "node",
-    "outDir": "./docs/js",
+    "outDir": "./public/js",
     "rootDir": "./src",
     "strict": true,
     "sourceMap": true,
