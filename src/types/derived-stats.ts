@@ -5,6 +5,12 @@ export interface DerivedStats {
   currentHp: number;
   currentMp: number;
   currentSp: number;
+  attack: number;
+  defense: number;
+  magAttack: number;
+  magDefense: number;
+  speed: number;
+  critical: number;
   physMitigation: number;
   magMitigation: number;
   evade: number;
