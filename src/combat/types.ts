@@ -6,3 +6,8 @@ export interface TurnResult {
   playerDead: boolean;
   fled: boolean;
 }
+
+export interface TuClock {
+  clock: number;
+  enemyNextAt: number;
+}
