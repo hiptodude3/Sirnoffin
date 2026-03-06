@@ -5,6 +5,7 @@ import { renderHeader } from './ui/render-header.js';
 import { renderTitle } from './ui/render-title.js';
 import { renderCreate } from './ui/render-create.js';
 import { renderTown } from './ui/render-town.js';
+import { renderCombat } from './ui/render-combat.js';
 
 const state: GameState = initGameState();
 
@@ -31,6 +32,9 @@ function render(): void {
         () => navigate('battle'),
         () => navigate('stats'),
       );
+    case 'battle':
+      if (!state.character) return navigate('title');
+      return renderCombat(state.character, () => navigate('town'));
   }
 }
 
