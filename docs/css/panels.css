@@ -1,0 +1,42 @@
+#header-bar {
+  background: #12121a;
+  border: 1px solid #2a2a3a;
+  padding: 8px 12px;
+  border-radius: 4px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+#main-content {
+  flex: 1;
+  background: #12121a;
+  border: 1px solid #2a2a3a;
+  padding: 12px;
+  border-radius: 4px;
+  overflow-y: auto;
+}
+
+#action-bar {
+  background: #12121a;
+  border: 1px solid #2a2a3a;
+  padding: 8px 12px;
+  border-radius: 4px;
+  min-height: 48px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn {
+  background: #1a1a2e;
+  color: #c8c8d0;
+  border: 1px solid #3a3a5a;
+  padding: 6px 16px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.btn:hover { background: #2a2a4e; border-color: #5a5a8a; }
