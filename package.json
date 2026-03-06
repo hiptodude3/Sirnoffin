@@ -1,8 +1,9 @@
 {
-  "name": "Project Rpg",
+  "name": "project-rpg",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "build": "tsc",
     "watch": "tsc --watch"
   },
