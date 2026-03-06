@@ -6,6 +6,7 @@ import { renderTitle } from './ui/render-title.js';
 import { renderCreate } from './ui/render-create.js';
 import { renderTown } from './ui/render-town.js';
 import { renderCombat } from './ui/render-combat.js';
+import { renderStats } from './ui/render-stats.js';
 
 const state: GameState = initGameState();
 
@@ -16,7 +17,6 @@ function navigate(screen: GameState['screen']): void {
 
 function render(): void {
   renderHeader(state.character);
-
   switch (state.screen) {
     case 'title':
       return renderTitle(() => navigate('create'));
@@ -35,6 +35,9 @@ function render(): void {
     case 'battle':
       if (!state.character) return navigate('title');
       return renderCombat(state.character, () => navigate('town'));
+    case 'stats':
+      if (!state.character) return navigate('title');
+      return renderStats(state.character, () => navigate('town'));
   }
 }
 
