@@ -2,8 +2,9 @@ import { getEl, clearEl, makeBtn } from './elements.js';
 import { Character } from '../types/character.js';
 import { getCombat, resetCombat } from '../state/combat-state.js';
 import { expForNextLevel } from '../formulas/exp-next-level.js';
-import { calcMaxHp } from '../formulas/max-hp.js';
-import { calcMaxMp } from '../formulas/max-mp.js';
+import { recalcDerived } from '../state/recalc-derived.js';
+
+const POINTS_PER_LEVEL = 3;
 
 export function showVictory(
   char: Character, onDone: () => void, reRender: () => void
@@ -13,15 +14,18 @@ export function showVictory(
   char.exp += cs.enemy.xp;
   char.credits += cs.enemy.gold;
   cs.log.push(`+${cs.enemy.xp} XP, +${cs.enemy.gold} credits.`);
+
   const needed = expForNextLevel(char.level);
   if (char.exp >= needed) {
     char.exp -= needed;
     char.level++;
-    char.derived.maxHp = calcMaxHp(char.level, char.stats.end);
-    char.derived.maxMp = calcMaxMp(char.level, char.stats.wis);
+    char.statPoints += POINTS_PER_LEVEL;
+    recalcDerived(char);
     char.derived.currentHp = char.derived.maxHp;
     char.derived.currentMp = char.derived.maxMp;
-    cs.log.push(`🎉 Level up! Now level ${char.level}!`);
+    cs.log.push(
+      `🎉 Level ${char.level}! +${POINTS_PER_LEVEL} stat points!`
+    );
   }
   cs.over = true;
   reRender();
