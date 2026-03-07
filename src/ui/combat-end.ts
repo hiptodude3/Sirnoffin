@@ -4,7 +4,14 @@ import { getCombat, resetCombat } from '../state/combat-state.js';
 import { expForNextLevel } from '../formulas/exp-next-level.js';
 import { recalcDerived } from '../state/recalc-derived.js';
 
-const POINTS_PER_LEVEL = 3;
+function endCombat(
+  label: string, cb: () => void, reRender: () => void
+): void {
+  getCombat().over = true;
+  reRender();
+  clearEl(getEl('action-bar'));
+  getEl('action-bar').appendChild(makeBtn(label, cb));
+}
 
 export function showVictory(
   char: Character, onDone: () => void, reRender: () => void
@@ -15,36 +22,26 @@ export function showVictory(
   char.credits += cs.enemy.gold;
   cs.log.push(`+${cs.enemy.xp} XP, +${cs.enemy.gold} credits.`);
 
-  const needed = expForNextLevel(char.level);
-  if (char.exp >= needed) {
+  let needed = expForNextLevel(char.level);
+  while (char.exp >= needed) {
     char.exp -= needed;
     char.level++;
-    char.statPoints += POINTS_PER_LEVEL;
+    char.statPoints += 3;
     recalcDerived(char);
-    char.derived.currentHp = char.derived.maxHp;
-    char.derived.currentMp = char.derived.maxMp;
-    cs.log.push(
-      `🎉 Level ${char.level}! +${POINTS_PER_LEVEL} stat points!`
-    );
+    cs.log.push(`🎉 Level ${char.level}! +3 stat points!`);
+    needed = expForNextLevel(char.level);
   }
-  cs.over = true;
-  reRender();
-  clearEl(getEl('action-bar'));
-  getEl('action-bar').appendChild(
-    makeBtn('Continue', () => { resetCombat(); onDone(); })
-  );
+
+  const d = char.derived;
+  d.currentHp = d.maxHp; d.currentMp = d.maxMp; d.currentSp = d.maxSp;
+  endCombat('Continue', () => { resetCombat(); onDone(); }, reRender);
 }
 
 export function showDefeat(
   char: Character, onDone: () => void, reRender: () => void
 ): void {
-  getCombat().over = true;
-  reRender();
-  clearEl(getEl('action-bar'));
-  getEl('action-bar').appendChild(
-    makeBtn('Return', () => {
-      char.derived.currentHp = Math.ceil(char.derived.maxHp * 0.25);
-      resetCombat(); onDone();
-    })
-  );
+  endCombat('Return', () => {
+    char.derived.currentHp = Math.ceil(char.derived.maxHp * 0.25);
+    resetCombat(); onDone();
+  }, reRender);
 }
