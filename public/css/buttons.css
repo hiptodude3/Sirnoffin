@@ -1,0 +1,32 @@
+.btn {
+  background: #1a1a2e;
+  color: #c8c8d0;
+  border: 1px solid #3a3a5a;
+  padding: 0.4rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  min-height: 2.4rem;
+}
+.btn:hover    { background: #2a2a4e; border-color: #5a5a8a; }
+.btn:active   { background: #3a3a6e; }
+.btn:disabled { opacity: 0.35; cursor: default; pointer-events: none; }
+
+.btn-sm {
+  min-height: 1.6rem;
+  min-width: 1.6rem;
+  padding: 0.15rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 30rem) {
+  .btn { width: 100%; text-align: center; }
+}
+
+@media (pointer: coarse) {
+  .btn    { min-height: 2.75rem; }
+  .btn-sm { min-height: 2rem; min-width: 2rem; }
+}
