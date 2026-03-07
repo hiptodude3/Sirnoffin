@@ -1,0 +1,13 @@
+.stat-grid { margin: 0.5rem 0; }
+.stat-row  { display: flex; align-items: center; gap: 0.5rem; padding: 0.2rem 0; }
+.stat-label { width: 3rem; color: #8888cc; font-weight: bold; }
+.stat-value { width: 2.5rem; text-align: right; }
+
+#combat-log {
+  max-height: 35vh;
+  overflow-y: auto;
+  color: #999;
+  padding: 0.25rem 0;
+  line-height: 1.5;
+}
+#combat-log p { margin: 0.15rem 0; }
