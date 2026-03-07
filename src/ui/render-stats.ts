@@ -3,6 +3,7 @@ import { Character } from '../types/character.js';
 import { PrimaryStats } from '../types/primary-stats.js';
 import { renderHeader } from './render-header.js';
 import { recalcDerived } from '../state/recalc-derived.js';
+import { renderVitals } from './bars.js';
 
 const KEYS: (keyof PrimaryStats)[] = ['str','dex','agi','end','int','wis'];
 
@@ -27,8 +28,7 @@ export function renderStats(char: Character, onBack: () => void): void {
     + `<p>ATK ${d.attack} DEF ${d.defense} SPD ${d.speed}`
     + ` CRIT ${d.critical.toFixed(1)}%</p>`
     + `<p>mATK ${d.magAttack} mDEF ${d.magDefense}</p>`
-    + `<p>HP ${d.currentHp}/${d.maxHp} MP ${d.currentMp}/${d.maxMp}`
-    + ` SP ${d.currentSp}/${d.maxSp}</p>`;
+    + renderVitals(d.currentHp, d.maxHp, d.currentMp, d.maxMp, d.currentSp, d.maxSp);
 
   main.querySelectorAll<HTMLButtonElement>('[data-stat]').forEach(btn => {
     btn.onclick = () => {
