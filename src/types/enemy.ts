@@ -1,9 +1,11 @@
 export interface EnemyTemplate {
   name: string;
-  hp: number;
-  attack: number;
-  defense: number;
-  speed: number;
+  str: number;
+  dex: number;
+  agi: number;
+  end: number;
+  int: number;
+  wis: number;
   xp: number;
   gold: [number, number];
 }
