@@ -1,3 +1,4 @@
+// src/types/primary-stats.ts
 export interface PrimaryStats {
   str: number;
   dex: number;
