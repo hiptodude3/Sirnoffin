@@ -7,6 +7,7 @@ import { renderCreate } from './ui/render-create.js';
 import { renderTown } from './ui/render-town.js';
 import { renderCombat } from './ui/render-combat.js';
 import { renderStats } from './ui/render-stats.js';
+import { renderSettings } from './ui/render-settings.js';
 
 const state: GameState = initGameState();
 
@@ -31,6 +32,7 @@ function render(): void {
         state.character,
         () => navigate('battle'),
         () => navigate('stats'),
+        () => navigate('settings'),
       );
     case 'battle':
       if (!state.character) return navigate('title');
@@ -38,6 +40,8 @@ function render(): void {
     case 'stats':
       if (!state.character) return navigate('title');
       return renderStats(state.character, () => navigate('town'));
+    case 'settings':
+      return renderSettings(() => navigate('town'));
   }
 }
 
